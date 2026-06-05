@@ -68,6 +68,11 @@ def show_loans():
             ]
         )
 
+        loan_date = st.date_input(
+            "Loan Date",
+            value=today_ist()
+        )
+
         payment_mode = st.selectbox(
             "Payment Mode",
             [
@@ -88,14 +93,8 @@ def show_loans():
             value=0.0
         )
 
-        emi_amount = st.number_input(
-            "EMI Amount",
-            min_value=0.0,
-            value=0.0
-        )
-
         due_date = st.date_input(
-            "Due Date",
+            "Due Date (Optional)",
             value=today_ist()
         )
 
@@ -143,7 +142,7 @@ def show_loans():
                 counterparty_type,
 
                 "loan_date":
-                str(today_ist()),
+                str(loan_date),
 
                 "payment_mode":
                 payment_mode,
@@ -161,7 +160,7 @@ def show_loans():
                 float(interest_rate),
 
                 "emi_amount":
-                float(emi_amount),
+                0,
 
                 "due_date":
                 str(due_date),
@@ -214,11 +213,9 @@ def show_loans():
             else:
 
                 try:
-
                     error_message = response.json()
 
                 except Exception:
-
                     error_message = response.text
 
                 st.error(
@@ -237,9 +234,7 @@ def show_loans():
 
     st.divider()
 
-    st.subheader(
-        "📒 Loan Register"
-    )
+    st.subheader("📒 Loan Register")
 
     loans_df = get_loans()
 
