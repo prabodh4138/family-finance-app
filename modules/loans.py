@@ -93,11 +93,6 @@ def show_loans():
             value=0.0
         )
 
-        due_date = st.date_input(
-            "Due Date (Optional)",
-            value=today_ist()
-        )
-
         remarks = st.text_input(
             "Remarks"
         )
@@ -163,7 +158,7 @@ def show_loans():
                 0,
 
                 "due_date":
-                str(due_date),
+                str(loan_date),
 
                 "remarks":
                 remarks,
@@ -234,7 +229,9 @@ def show_loans():
 
     st.divider()
 
-    st.subheader("📒 Loan Register")
+    st.subheader(
+        "📒 Loan Register"
+    )
 
     loans_df = get_loans()
 
