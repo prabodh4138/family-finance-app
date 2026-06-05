@@ -80,19 +80,25 @@ def show_repayment():
     st.info(
 
         f"""
-        Member : {selected['member_name']}
+Member : {selected['member_name']}
 
-        Counterparty : {selected['counterparty_name']}
+Counterparty : {selected['counterparty_name']}
 
-        Loan Type : {selected['loan_type']}
+Loan Type : {selected['loan_type']}
 
-        Pending Amount : ₹{selected['pending_amount']:,.2f}
+Pending Amount : ₹{selected['pending_amount']:,.2f}
         """
+
     )
 
     # --------------------------------------
     # FORM
     # --------------------------------------
+
+    payment_date = st.date_input(
+        "Payment Date",
+        value=today_ist()
+    )
 
     repayment_amount = st.number_input(
         "Repayment Amount",
@@ -128,11 +134,11 @@ def show_repayment():
 
                 st.error(
                     f"""
-                    Repayment amount cannot exceed
-                    pending amount.
+Repayment amount cannot exceed
+pending amount.
 
-                    Pending Amount:
-                    ₹ {pending_amount:,.2f}
+Pending Amount:
+₹ {pending_amount:,.2f}
                     """
                 )
 
@@ -153,7 +159,7 @@ def show_repayment():
                 selected["counterparty_name"],
 
                 "payment_date":
-                str(today_ist()),
+                str(payment_date),
 
                 "payment_type":
                 "LOAN_REPAYMENT",
@@ -198,12 +204,12 @@ def show_repayment():
                     int(selected["id"]),
 
                     f"""
-                    Loan Repayment
+Loan Repayment
 
-                    ₹{repayment_amount:,.2f}
+₹{repayment_amount:,.2f}
 
-                    Counterparty:
-                    {selected['counterparty_name']}
+Counterparty:
+{selected['counterparty_name']}
                     """
 
                 )
